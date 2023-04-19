@@ -20,7 +20,7 @@ class CapacitacionesPendientes extends Component
     public $capacitacionPendiente_id;
     public function mount()
     {
-        $this->componentName = 'Asignar Capacitaciones';
+        $this->componentName = 'Capacitaciones pendientes';
         $this->pagination = 5;
         $this->show = 'ver';
         $this->pageTitle = 'Lista de Capacitaciones Asignadas';
@@ -39,14 +39,16 @@ class CapacitacionesPendientes extends Component
         ->join('users as userACapacitar', 'asignar_capacitaciones.userACapacitar_id', '=', 'userACapacitar.id')
         ->where('asignar_capacitaciones.userACapacitar_id', '=', $userId)
         ->where('asignar_capacitaciones.estado', '=', 'ASIGNADA')
+        ->select('asignar_capacitaciones.id as asignarCapacitaciones_id', 'capacitaciones.id as capacitacion_id', 'capacitaciones.nombreDeCapacitacion', 'capacitaciones.descripcion', 'capacitaciones.enlaceDeYoutube', 'userACapacitar.name as userACapacitar_name')
         ->get();
+
         return view('livewire.capacitacionesPendientes.index', compact('capacitacionesPendientes'))
         ->extends('adminlte::page')
         ->section('content');
     }
 
-    public function LoadModalData(capacitaciones $capacitacion){
-        $this->capacitacionPendiente_id = $capacitacion->id;
+    public function LoadModalData(capacitaciones $capacitacion, $capacitacionPendienteId){
+        $this->capacitacionPendiente_id = $capacitacionPendienteId;
         $this->capacitacionSelect_title = $capacitacion->nombreDeCapacitacion;
         $this->capacitacionSelect_desc = $capacitacion->descripcion;
         $this->capacitacionSelect_video = $capacitacion->enlaceDeYoutube;
@@ -54,5 +56,11 @@ class CapacitacionesPendientes extends Component
     }
 
     public function Finalizado(){
+        $capacitacionPendiente = asignarCapacitaciones::find($this->capacitacionPendiente_id);
+        $capacitacionPendiente->estado = 'FINALIZADO';
+        $capacitacionPendiente->save();
+
+        $this->emit('hide-modal','Mostrando modal para edicion');
+
     }
 }

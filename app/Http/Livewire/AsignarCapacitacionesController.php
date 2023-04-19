@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire;
 
+use App\Mail\AsignadasCapacitacionesMail;
 use App\Models\asignarCapacitaciones;
 use Livewire\Component;
 use Livewire\Livewire;
@@ -9,6 +10,7 @@ use Livewire\WithPagination;
 
 use App\Models\capacitaciones;
 use App\Models\User;
+use Illuminate\Support\Facades\Mail;
 
 class asignarCapacitacionesController extends Component
 {
@@ -103,6 +105,7 @@ class asignarCapacitacionesController extends Component
             'nombreDeCapacitacion'=>'required|min:3|max:100',
             'descripcion'=>'required|min:3|max:100',
             'enlaceDeYoutube'=>'required|min:3|max:100',
+            'statusCapacitacion'=>'required|not_in:Elegir',
         ];
         $messages=[
             'nombreDeCapacitacion.required'=>'El nombre de la capacitación es requerido',
@@ -114,6 +117,10 @@ class asignarCapacitacionesController extends Component
             'enlaceDeYoutube.required'=>'El enlace de youtube es requerido',
             'enlaceDeYoutube.min'=>'El enlace de youtube debe tener al menos 3 caracteres',
             'enlaceDeYoutube.max'=>'El enlace de youtube debe tener como máximo 100 caracteres',
+
+            'statusCapacitacion.required'=>'El estado de la capacitación es requerido',
+            'statusCapacitacion.not_in'=>'El estado de la capacitación es requerido',
+
         ];
 
         $this->validate($rules,$messages);
@@ -127,10 +134,13 @@ class asignarCapacitacionesController extends Component
             'userCapacitador_id'=>auth()->user()->id,
             'estado'=>$this->statusCapacitacion,
         ]);
+        $usuarioACapacitar = User::find($this->usuario_id);
+        Mail::to($usuarioACapacitar)->send(new AsignadasCapacitacionesMail());
         $this->resetUI();
         $this->show='ver';
         $this->emit('item-added', 'Se ha asignado la capacitación');
         $this->pageTitle = 'Lista de Capacitaciones Asignadas';
+
     }
 
     public function Edit(capacitaciones $capacitacion){

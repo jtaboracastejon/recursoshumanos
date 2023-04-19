@@ -10,12 +10,13 @@
             <div class="widget widget-chart-one">
                 <div class="widget-content row col-12 justify-content-around">
                     @foreach ($capacitacionesPendientes as $capacitacion)
-                    <div class="card" style="width: 18rem;">
+                        <div class="card" style="width: 18rem;">
                             <div class="card-body">
-                                <h5 class="card-title font-weight-bold">{{$capacitacion->nombreDeCapacitacion}}</h5>
-                                <p class="card-text">{{$capacitacion->descripcion}}</p>
-                                <a wire:click.prevent="LoadModalData({{$capacitacion->capacitacion_id}})" href="javascript:void(0)" class="btn bg-success mb-3" data-toggle="modal"
-                                data-target="#theModal"><i class="fas fa-eye"></i> Ver capacitación</a>
+                                <h5 class="card-title font-weight-bold">{{ $capacitacion->nombreDeCapacitacion }}</h5>
+                                <p class="card-text">{{ $capacitacion->descripcion }}</p>
+                                <a wire:click.prevent="LoadModalData({{ $capacitacion->capacitacion_id }}, {{ $capacitacion->asignarCapacitaciones_id }})"
+                                    href="javascript:void(0)" class="btn bg-success mb-3" data-toggle="modal"
+                                    data-target="#theModal"><i class="fas fa-eye"></i> Ver capacitación</a>
 
                             </div>
                         </div>
@@ -27,9 +28,12 @@
     </div>
 </div>
 <script>
-document.addEventListener('DOMContentLoaded', function() {
-    window.livewire.on('show-modal', msg => {
-        $('#theModal').modal('show')
+    document.addEventListener('DOMContentLoaded', function() {
+        window.livewire.on('show-modal', msg => {
+            $('#theModal').modal('show')
+        });
     });
-});
+    window.livewire.on('hide-modal', msg => {
+        $('#theModal').modal('hide')
+    });
 </script>

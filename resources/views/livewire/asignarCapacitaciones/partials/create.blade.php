@@ -144,6 +144,8 @@
                                         <option value="FINALIZADO">FINALIZADO</option>
                                     </select>
                                 </div>
+                                @error('statusCapacitacion') <span class="text-danger er">{{$message}}</span>@enderror
+
                             @endif
                         </div>
 

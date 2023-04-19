@@ -34,5 +34,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/asignarcapacitaciones', asignarCapacitacionesController::class)->name('asignarcapacitaciones.partials.index');
 
     Route::get('/capacitacionespendientes', CapacitacionesPendientes::class);
+    Route::get('/mail', function () {
+        return view('mails.asignadas');
+    });
 });
 
