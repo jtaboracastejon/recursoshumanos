@@ -13,4 +13,14 @@ class capacitaciones extends Model
         'descripcion',
         'enlaceDeYoutube'
     ];
+
+    public function asignarCapacitaciones()
+    {
+        return $this->hasMany(asignarCapacitaciones::class);
+    }
+
+    public function users()
+    {
+        return $this->belongsToMany(User::class);
+    }
 }

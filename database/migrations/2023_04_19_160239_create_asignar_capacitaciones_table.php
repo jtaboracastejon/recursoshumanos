@@ -15,6 +15,10 @@ class CreateAsignarCapacitacionesTable extends Migration
     {
         Schema::create('asignar_capacitaciones', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('capacitacion_id')->constrained('capacitaciones');
+            $table->foreignId('userACapacitar_id')->constrained('users');
+            $table->foreignId('userCapacitador_id')->constrained('users');
+            $table->enum('estado', ['ASIGNADA', 'FINALIZADO'])->default('ASIGNADA');
             $table->timestamps();
         });
     }

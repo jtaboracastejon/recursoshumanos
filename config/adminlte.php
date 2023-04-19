@@ -252,6 +252,11 @@ return [
             'icon'        => 'far fa-fw fa-copyright',
         ],
         [
+            'text'        => 'Asignar Capacitaciones',
+            'url'         => '/asignarcapacitaciones',
+            'icon'        => 'far fa-fw fa-copyright',
+        ],
+        [
             'text'        => 'Capacitaciones',
             'url'         => '/capacitaciones',
             'icon'        => 'far fa-fw fa-copyright',
@@ -261,6 +266,7 @@ return [
             'url'         => '/usuarios',
             'icon'        => 'far fa-fw fa-copyright',
         ],
+
         ['header' => 'account_settings'],
         [
             'text' => 'profile',

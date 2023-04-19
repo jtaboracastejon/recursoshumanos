@@ -16,6 +16,57 @@
                 @include('common.searchBox')
                 <div class="widget-content">
                     {{-- Aqui va la tabla --}}
+                    <div class="table-responsive mb-4 mt-4">
+                        <table class="table table-hover table-striped datatable" style="width:100%">
+                            <thead>
+                                <tr>
+                                    <th>Nombre</th>
+                                    <th>Correo</th>
+                                    <th>Teléfono</th>
+                                    <th>Estado</th>
+                                    <th>Contraseña</th>
+                                    <th>Rol</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($users as $user)
+                                    <tr>
+                                        <td>{{ $user->name}}</td>
+                                        <td>{{ $user->email}}</td>
+                                        <td>{{ $user->phone}}</td>
+                                        <td>{{ $user->status}}</td>
+                                        <td>{{ $user->password}}</td>
+                                        <td>{{ $user->rol}}</td>
+                                        <td>
+                                            <a href="javascript:void(0)" wire:click="Edit({{ $user->id }})"
+                                                class="btn text-warning btn-dark" title="Edit">
+                                                <i class="fa fa-edit fa-xl"></i>
+                                            </a>
+                                            <a href="javascript:void(0)"
+                                            {{-- ,'{{ $product->ingredients->count() }}','{{ $product->products->count() }}' --}}
+                                            onclick="ConfirmDelete('{{ $user->id }}')"
+                                                class="btn text-danger btn-dark" title="Delete">
+                                                <i class="fa fa-trash fa-xl"></i>
+                                            </a>
+
+
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <th>Nombre</th>
+                                    <th>Correo</th>
+                                    <th>Teléfono</th>
+                                    <th>Estado</th>
+                                    <th>Contraseña</th>
+                                    <th>Rol</th>
+                                </tr>
+                            </tfoot>
+                        </table>
+                        {{ $users->links() }}
+                    </div>
                 </div>
             </div>
         </div>
