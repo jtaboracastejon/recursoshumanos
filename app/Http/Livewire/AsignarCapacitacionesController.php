@@ -27,6 +27,7 @@ class asignarCapacitacionesController extends Component
         $this->pagination = 5;
         $this->show = 'ver';
         $this->pageTitle = 'Lista de Capacitaciones Asignadas';
+        $this->statusCapacitacion = "Elegir";
     }
 
     public function paginationView()
@@ -36,7 +37,12 @@ class asignarCapacitacionesController extends Component
     public function render()
     {
 
-        $capacitacionesAsignadas = asignarCapacitaciones::orderBy('capacitacion_id','desc')->paginate($this->pagination);
+        $capacitacionesAsignadas = asignarCapacitaciones::join('capacitaciones', 'asignar_capacitaciones.capacitacion_id', '=', 'capacitaciones.id')
+        ->join('users as userACapacitar', 'asignar_capacitaciones.userACapacitar_id', '=', 'userACapacitar.id')
+        ->join('users as userCapacitador', 'asignar_capacitaciones.userCapacitador_id', '=', 'userCapacitador.id')
+        ->select('asignar_capacitaciones.id', 'asignar_capacitaciones.estado', 'asignar_capacitaciones.estado', 'capacitaciones.nombreDeCapacitacion', 'userACapacitar.name as nombreDeUsuario', 'userCapacitador.name as nombreDeCapacitador', 'asignar_capacitaciones.created_at')
+        ->orderBy('asignar_capacitaciones.id', 'desc')
+        ->paginate($this->pagination);
 
         return view('livewire.asignarCapacitaciones.barrel', compact('capacitacionesAsignadas'))
         ->extends('adminlte::page')
@@ -123,6 +129,8 @@ class asignarCapacitacionesController extends Component
         ]);
         $this->resetUI();
         $this->show='ver';
+        $this->emit('item-added', 'Se ha asignado la capacitación');
+        $this->pageTitle = 'Lista de Capacitaciones Asignadas';
     }
 
     public function Edit(capacitaciones $capacitacion){

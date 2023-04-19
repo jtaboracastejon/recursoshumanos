@@ -139,6 +139,7 @@
                                     <label>Estado Campaña</label>
                                     <select name="" id="" wire:model.lazy="statusCapacitacion"
                                         class="form-control">
+                                        <option value="Elegir">Seleccionar</option>
                                         <option value="ASIGNADA">ASIGNADA</option>
                                         <option value="FINALIZADO">FINALIZADO</option>
                                     </select>

@@ -16,12 +16,12 @@ class asignarCapacitaciones extends Model
         'estado'
     ];
 
-    public function capacitaciones()
+    public function capacitacion()
     {
         return $this->belongsTo(capacitaciones::class);
     }
 
-    public function users()
+    public function user()
     {
         return $this->belongsToMany(User::class);
     }

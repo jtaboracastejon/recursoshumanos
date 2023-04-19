@@ -115,9 +115,10 @@ class UsersController extends Component
             'email'=>$this->email,
             'phone'=>$this->phone,
             'status'=>$this->status,
-            'password'=>Hash::make($this->password),,
-            'rol'=>$this->rol
-        ]);
+            'password'=>Hash::make($this->password),
+            'rol'=>$this->rol,
+        ]
+    );
         $this->resetUI();
         $this->emit('item-updated', 'Se ha actualizado la marca');
     }

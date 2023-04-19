@@ -44,4 +44,14 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function capacitacion()
+    {
+        return $this->belongsToMany(capacitaciones::class);
+    }
+    public function capacitacionAsignada(){
+        return $this->hasMany(asignarCapacitaciones::class);
+    }
+
+
 }

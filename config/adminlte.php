@@ -236,101 +236,36 @@ return [
             'topnav_right' => true,
         ],
 
-        // Sidebar items:
-        [
-            'type' => 'sidebar-menu-search',
-            'text' => 'search',
-        ],
-        [
-            'text' => 'blog',
-            'url'  => 'admin/blog',
-            'can'  => 'manage-blog',
-        ],
+        // Sidebar items:\
         [
             'text'        => 'Marcas',
             'url'         => '/marcas',
             'icon'        => 'far fa-fw fa-copyright',
+            'can'         => 'ADMIN',
         ],
         [
             'text'        => 'Asignar Capacitaciones',
             'url'         => '/asignarcapacitaciones',
-            'icon'        => 'far fa-fw fa-copyright',
+            'icon'        => 'fas fa-plus-circle',
+            'can'         => 'ADMIN',
         ],
         [
             'text'        => 'Capacitaciones',
             'url'         => '/capacitaciones',
-            'icon'        => 'far fa-fw fa-copyright',
+            'icon'        => 'fas fa-clipboard-list',
+            'can'         => 'ADMIN',
         ],
         [
             'text'        => 'Usuarios',
             'url'         => '/usuarios',
-            'icon'        => 'far fa-fw fa-copyright',
-        ],
-
-        ['header' => 'account_settings'],
-        [
-            'text' => 'profile',
-            'url'  => 'admin/settings',
-            'icon' => 'fas fa-fw fa-user',
+            'icon'        => 'fas fa-fw fa-user',
+            'can'         => 'ADMIN',
         ],
         [
-            'text' => 'change_password',
-            'url'  => 'admin/settings',
-            'icon' => 'fas fa-fw fa-lock',
-        ],
-        [
-            'text'    => 'multilevel',
-            'icon'    => 'fas fa-fw fa-share',
-            'submenu' => [
-                [
-                    'text' => 'level_one',
-                    'url'  => '#',
-                ],
-                [
-                    'text'    => 'level_one',
-                    'url'     => '#',
-                    'submenu' => [
-                        [
-                            'text' => 'level_two',
-                            'url'  => '#',
-                        ],
-                        [
-                            'text'    => 'level_two',
-                            'url'     => '#',
-                            'submenu' => [
-                                [
-                                    'text' => 'level_three',
-                                    'url'  => '#',
-                                ],
-                                [
-                                    'text' => 'level_three',
-                                    'url'  => '#',
-                                ],
-                            ],
-                        ],
-                    ],
-                ],
-                [
-                    'text' => 'level_one',
-                    'url'  => '#',
-                ],
-            ],
-        ],
-        ['header' => 'labels'],
-        [
-            'text'       => 'important',
-            'icon_color' => 'red',
-            'url'        => '#',
-        ],
-        [
-            'text'       => 'warning',
-            'icon_color' => 'yellow',
-            'url'        => '#',
-        ],
-        [
-            'text'       => 'information',
-            'icon_color' => 'cyan',
-            'url'        => '#',
+            'text'        => 'Capacitaciones pendientes',
+            'url'         => '/capacitacionespendientes',
+            'icon'        => 'fas fa-tasks',
+            'can'         => 'USER' || 'ADMIN',
         ],
     ],
 

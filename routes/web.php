@@ -3,6 +3,7 @@
 use App\Http\Livewire\asignarCapacitacionesController;
 use App\Http\Livewire\BrandsController;
 use App\Http\Livewire\CapacitacionesController;
+use App\Http\Livewire\CapacitacionesPendientes;
 use App\Http\Livewire\UsersController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -24,9 +25,14 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::get('/marcas', BrandsController::class)->name('brands.index');
-Route::get('/capacitaciones', CapacitacionesController::class)->name('capacitaciones.index');
-Route::get('/usuarios', UsersController::class)->name('users.index');
-Route::get('/asignarcapacitaciones', asignarCapacitacionesController::class)->name('asignarcapacitaciones.partials.index');
+Route::middleware(['auth'])->group(function () {
+
+    Route::get('/home', [App\Http\Controllers\HomeController::class, 'index']);
+    Route::get('/marcas', BrandsController::class)->name('brands.index');
+    Route::get('/capacitaciones', CapacitacionesController::class)->name('capacitaciones.index');
+    Route::get('/usuarios', UsersController::class)->name('users.index');
+    Route::get('/asignarcapacitaciones', asignarCapacitacionesController::class)->name('asignarcapacitaciones.partials.index');
+
+    Route::get('/capacitacionespendientes', CapacitacionesPendientes::class);
+});
 

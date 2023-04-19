@@ -9,7 +9,7 @@
         <div class="col-xl-12 col-lg-12 col-sm-12 layout-spacing">
             <div class="widget widget-chart-one">
                 <div class="widget-heading">
-                    <a href="javascript:void(0)" class="btn bg-dark mb-3" data-toggle="modal" data-target="#theModal">Agregar</a>
+                    <a href="javascript:void(0)" class="btn bg-dark mb-3" data-toggle="modal" data-target="#theModal"><i class="fas fa-plus-circle"></i> Agregar</a>
 
                 </div>
 

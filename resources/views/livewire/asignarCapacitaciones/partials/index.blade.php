@@ -11,21 +11,25 @@
                                     <th>Usuario a capacitar</th>
                                     <th>Capacitador</th>
                                     <th>Estado</th>
+                                    <th>Asignada en</th>
+
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach ($capacitacionesAsignadas as $asignada )
                                     <tr>
-                                        <td>{{ $asignada->capacitacion->nombreDeCapacitacion }}</td>
-                                        <td>{{ $asignada->user->name }}</td>
-                                        <td>{{ $asignada->capacitador->name }}</td>
+                                        <td>{{ $asignada->nombreDeCapacitacion }}</td>
+                                        <td>{{ $asignada->nombreDeUsuario }}</td>
+                                        <td>{{ $asignada->nombreDeCapacitador }}</td>
                                         <td>
-                                            @if ($asignada->estado == 1)
-                                                <span class="badge badge-success">Aprobado</span>
+                                            @if ($asignada->estado == "ASIGNADA")
+                                                <span class="badge badge-success">ASIGNADA</span>
                                             @else
-                                                <span class="badge badge-danger">Pendiente</span>
+                                                <span class="badge badge-danger">FINALIZADA</span>
                                             @endif
                                         </td>
+                                        <td>{{ $asignada->created_at }}</td>
+
                                     </tr>
                                 @endforeach
                             </tbody>
