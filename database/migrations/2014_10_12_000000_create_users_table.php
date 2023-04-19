@@ -20,6 +20,7 @@ class CreateUsersTable extends Migration
             $table->string('phone')->nullable();
             $table->enum('status', ['ACTIVE', 'LOCKED'])->default('ACTIVE');
             $table->string('password');
+            $table->enum('rol', ['ADMIN', 'USER'])->default('USER');
             $table->rememberToken();
             $table->timestamps();
         });
