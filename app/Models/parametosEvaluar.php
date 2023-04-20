@@ -11,6 +11,7 @@ class parametosEvaluar extends Model
     protected $fillable = [
         'niveldeIniciativa',
         'generaciondeIdeas',
+        'resoluciondeProblemas',
         'cumplimientodeObjetivo',
         'calidaddeTrabajo',
         'userEvaluado_id',

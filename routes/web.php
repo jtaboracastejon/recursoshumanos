@@ -4,9 +4,11 @@ use App\Http\Livewire\asignarCapacitacionesController;
 use App\Http\Livewire\BrandsController;
 use App\Http\Livewire\CapacitacionesController;
 use App\Http\Livewire\CapacitacionesPendientes;
+use App\Http\Livewire\ParametrosEvaluacionController;
 use App\Http\Livewire\UsersController;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Route;;
+use App\Http\Controllers\PDFController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,6 +20,7 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::get('/generate-pdf', [PDFController::class, 'generatePDF']);
 
 Route::get('/', function () {
     return view('auth.login');
@@ -34,8 +37,10 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/asignarcapacitaciones', asignarCapacitacionesController::class)->name('asignarcapacitaciones.partials.index');
 
     Route::get('/capacitacionespendientes', CapacitacionesPendientes::class);
+    Route::get('/evaluacion', ParametrosEvaluacionController::class)->name('parametrosEvaluacion.index');
     Route::get('/mail', function () {
         return view('mails.asignadas');
     });
+
 });
 

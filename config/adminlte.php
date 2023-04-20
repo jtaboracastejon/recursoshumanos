@@ -267,6 +267,12 @@ return [
             'icon'        => 'fas fa-tasks',
             'can'         => 'USER' || 'ADMIN',
         ],
+        [
+            'text'        => 'Parametros de evaluación',
+            'url'         => '/evaluacion',
+            'icon'        => 'fas fa-tasks',
+            'can'         => 'ADMIN',
+        ],
     ],
 
     /*

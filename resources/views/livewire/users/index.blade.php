@@ -24,8 +24,8 @@
                                     <th>Correo</th>
                                     <th>Teléfono</th>
                                     <th>Estado</th>
-                                    <th>Contraseña</th>
                                     <th>Rol</th>
+                                    <th>Acciones</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -35,7 +35,6 @@
                                         <td>{{ $user->email}}</td>
                                         <td>{{ $user->phone}}</td>
                                         <td>{{ $user->status}}</td>
-                                        <td>{{ $user->password}}</td>
                                         <td>{{ $user->rol}}</td>
                                         <td>
                                             <a href="javascript:void(0)" wire:click="Edit({{ $user->id }})"
@@ -60,8 +59,8 @@
                                     <th>Correo</th>
                                     <th>Teléfono</th>
                                     <th>Estado</th>
-                                    <th>Contraseña</th>
                                     <th>Rol</th>
+                                    <th>Acciones</th>
                                 </tr>
                             </tfoot>
                         </table>
