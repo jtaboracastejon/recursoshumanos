@@ -9,6 +9,9 @@ use Livewire\WithPagination;
 use App\Models\parametosEvaluar;
 use App\Models\User;
 
+use Illuminate\Http\Request;
+use Barryvdh\DomPDF\Facade\Pdf;
+
 class ParametrosEvaluacionController extends Component
 {
     use WithPagination;
@@ -23,7 +26,7 @@ class ParametrosEvaluacionController extends Component
     public function mount()
     {
         $this->componentName = 'Parametros de Evaluación';
-        $this->pageTitle = 'Listado';
+        $this->pageTitle = 'Lista de Evaluaciones';
         $this->pagination = 5;
         $this->show = 'ver';
 
@@ -109,9 +112,21 @@ class ParametrosEvaluacionController extends Component
         $this->validate($rules,$messages);
     }
 
+    public function generatePDF()
+    {
+        $data = [
+            'title' => 'Welcome to ItSolutionStuff.com',
+            'date' => date('m/d/Y')
+        ];
+
+        $pdf = Pdf::loadView('myPDF', $data);
+
+        return $pdf->download('itsolutionstuff.pdf');
+    }
+
     public function Store(){
         $this->validateForm();
-        parametosEvaluar::create([
+        $parametros = parametosEvaluar::create([
             'niveldeIniciativa'=>$this->niveldeIniciativa,
             'generaciondeIdeas'=>$this->generaciondeIdeas,
             'resoluciondeProblemas'=>$this->resoluciondeProblemas,
@@ -120,6 +135,8 @@ class ParametrosEvaluacionController extends Component
             'userEvaluado_id'=>$this->usuario_id,
             'userEvaluador_id'=>$this->loggedUserId
         ]);
+        $id = $parametros->id;
+        $this->generatePDF();
         $this->resetUI();
         $this->emit('item-added', 'Se ha asignado la capacitación');
         $this->pageTitle = 'Lista de Capacitaciones Asignadas';
