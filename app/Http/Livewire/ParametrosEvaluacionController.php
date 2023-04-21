@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire;
 
+use App\Http\Controllers\PDFController;
 use Livewire\Component;
 use Livewire\Livewire;
 use Livewire\WithPagination;
@@ -10,7 +11,6 @@ use App\Models\parametosEvaluar;
 use App\Models\User;
 
 use Illuminate\Http\Request;
-use Barryvdh\DomPDF\Facade\Pdf;
 
 class ParametrosEvaluacionController extends Component
 {
@@ -50,8 +50,6 @@ class ParametrosEvaluacionController extends Component
         ->select('parametos_evaluars.id', 'parametos_evaluars.niveldeIniciativa', 'parametos_evaluars.generaciondeIdeas', 'parametos_evaluars.resoluciondeProblemas', 'parametos_evaluars.cumplimientodeObjetivo', 'parametos_evaluars.calidaddeTrabajo', 'userEvaluado.name as nombreDeUsuarioEvaluado', 'userEvaluador.name as nombreDeUsuarioEvaluador', 'parametos_evaluars.created_at')
         ->orderBy('parametos_evaluars.id', 'desc')
         ->get();
-
-
         return view('livewire.parametrosEvaluacion.barrel', compact('evaluaciones'))
         ->extends('adminlte::page')
         ->section('content');
@@ -112,17 +110,6 @@ class ParametrosEvaluacionController extends Component
         $this->validate($rules,$messages);
     }
 
-    public function generatePDF()
-    {
-        $data = [
-            'title' => 'Welcome to ItSolutionStuff.com',
-            'date' => date('m/d/Y')
-        ];
-
-        $pdf = Pdf::loadView('myPDF', $data);
-
-        return $pdf->download('itsolutionstuff.pdf');
-    }
 
     public function Store(){
         $this->validateForm();
@@ -136,7 +123,6 @@ class ParametrosEvaluacionController extends Component
             'userEvaluador_id'=>$this->loggedUserId
         ]);
         $id = $parametros->id;
-        $this->generatePDF();
         $this->resetUI();
         $this->emit('item-added', 'Se ha asignado la capacitación');
         $this->pageTitle = 'Lista de Capacitaciones Asignadas';

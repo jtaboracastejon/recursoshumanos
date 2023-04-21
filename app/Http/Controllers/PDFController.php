@@ -12,14 +12,13 @@ class PDFController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    public $data = [];
     public function generatePDF()
     {
-        $data = [
-            'title' => 'Welcome to ItSolutionStuff.com',
-            'date' => date('m/d/Y')
-        ];
 
-        $pdf = PDF::loadView('myPDF', $data);
+
+        $pdf = PDF::loadView('myPDF', $this->data);
 
         return $pdf->download('itsolutionstuff.pdf');
     }

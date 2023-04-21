@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ExportController;
 use App\Http\Livewire\asignarCapacitacionesController;
 use App\Http\Livewire\BrandsController;
 use App\Http\Livewire\CapacitacionesController;
@@ -9,6 +10,7 @@ use App\Http\Livewire\UsersController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;;
 use App\Http\Controllers\PDFController;
+use App\Http\Livewire\ReportController;
 
 /*
 |--------------------------------------------------------------------------
